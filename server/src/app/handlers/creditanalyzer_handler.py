@@ -40,7 +40,8 @@ class CreditAnalyzerHandler:
     def __init__(self):
         pass
 
-    def handle(cls):
+    @staticmethod
+    def handle():
         try:
             input_data = request.get_json()
 
