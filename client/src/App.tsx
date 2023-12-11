@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 
 const formFieldData = [
+  { label: 'Nome Completo', name: 'Attribute19', type: 'text' },
   { label: 'Duração em meses', name: 'Attribute2', type: 'number' },
   { label: 'Propósito', name: 'Attribute4', type: 'text' },
   { label: 'Quanto você quer pegar emprestado?', name: 'Attribute5', type: 'select', options: [500, 1000, 5000, 10000] },

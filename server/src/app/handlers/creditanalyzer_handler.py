@@ -8,6 +8,15 @@ import os
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
+# Importando bibliotecas necessárias
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+
+from ucimlrepo import fetch_ucirepo
+
 # Mapeamento dos atributos para seus respectivos nomes
 attribute_mapping = {
     'Attribute1': 'Status da conta corrente existente',
@@ -49,7 +58,19 @@ class CreditAnalyzerHandler:
             if not input_data:
                 return jsonify({'error': 'Missing Params'}), 400
 
-            categorical_cols = [f'Attribute{i}' for i in range(1, 62)]
+            # categorical_cols = [f'Attribute{i}' for i in range(1, 62)]
+
+
+            
+            # fetch dataset
+            statlog_german_credit_data = fetch_ucirepo(id=144)
+
+            # Supondo que 'class' seja a coluna-alvo
+            X = statlog_german_credit_data.data.features
+            y = statlog_german_credit_data.data.targets['class']
+
+            # Identificando colunas categóricas
+            categorical_cols = [col for col in X.columns if X[col].dtype == 'object']
 
             preprocessor = ColumnTransformer(
                 transformers=[
@@ -58,13 +79,19 @@ class CreditAnalyzerHandler:
                 remainder='passthrough'
             )
 
-            input_df = pd.DataFrame({col: [input_data.get(col, 'default_value')] for col in categorical_cols})
+            print(categorical_cols)
 
-            categorical_transformers = [('cat', OneHotEncoder(handle_unknown='ignore'), categorical_cols)]
-            preprocessor.transformers = categorical_transformers
+            # Dividindo os dados em conjuntos de treino e teste
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-            input_preprocessed = preprocessor.fit_transform(input_df)
+            # Pré-processando os dados
+            X_train_preprocessed = preprocessor.fit_transform(X_train)
+            X_test_preprocessed = preprocessor.transform(X_test)
 
+            sample_input_df = pd.DataFrame([input_data])
+
+            # Pré-processando os dados usando o mesmo transformer usado no treinamento
+            input_preprocessed = preprocessor.transform(sample_input_df)            
             prediction = best_model.predict(input_preprocessed)
 
             mapped_response = {attribute_mapping[key]: input_data[key] for key in input_data}
