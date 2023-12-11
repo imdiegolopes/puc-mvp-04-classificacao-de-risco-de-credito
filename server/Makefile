@@ -21,7 +21,7 @@ build:
 
 # Run the Docker container
 run:
-	docker run -d -p $(FLASK_PORT):$(FLASK_PORT) --network my_network --name $(DOCKER_CONTAINER_NAME) $(DOCKER_IMAGE_NAME)
+	docker run -d -p $(FLASK_PORT):$(FLASK_PORT) --network $(NETWORK_NAME) --name $(DOCKER_CONTAINER_NAME) $(DOCKER_IMAGE_NAME)
 
 # Stop and remove the Docker container
 stop:
