@@ -2,7 +2,9 @@ import { useState } from 'react';
 import './App.css';
 
 const formFieldData = [
+  { label: 'Você é nosso cliente?', name: 'Attribute1', type: 'select', options: ["Sim", "Não"] },
   { label: 'Nome Completo', name: 'Attribute19', type: 'text' },
+  { label: 'Quantos anos você tem?', name: 'Attribute13', type: 'number' },
   { label: 'Duração em meses', name: 'Attribute2', type: 'number' },
   { label: 'Propósito', name: 'Attribute4', type: 'text' },
   { label: 'Quanto você quer pegar emprestado?', name: 'Attribute5', type: 'select', options: [500, 1000, 5000, 10000] },
@@ -19,6 +21,12 @@ function App() {
     event.preventDefault();
 
     try {
+      formData.Attribute1 = formData?.Attribute1 && formData.Attribute1 == 'Sim' ? 'A13' : 'A11'
+      formData.Attribute8 = 3; // Define a taxa de 8% para todos os clientes
+      formData.Attribute11 = 3;
+      formData.Attribute16 = 0; // Define o numero de credito para 0
+      formData.Attribute18 = 0; // Define o numero de pessoas obrigadas a fornecer sustento para 0
+
       const response = await fetch('http://localhost:5000/v1/analyze_credit', {
         method: 'POST',
         headers: {
@@ -28,6 +36,7 @@ function App() {
       });
 
       const data = await response.json();
+      alert('Resposta da Análise de Crédito: ' + (data.class == 'Bad' ? 'Reprovado!' : 'Aprovado!') + '!')
       setResponse(data.class);
     } catch (error) {
       console.error('Error:', error);
@@ -71,11 +80,11 @@ function App() {
           ))}
           <button type="submit">Analisar</button>
         </form>
-        <p>Response: {response}</p>
+        {response && (
+          <p>Resposta da Análise de Crédito: {response == 'Bad' ? 'Negativa! Reprovado' : 'Aprovado!'}</p>
+
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }

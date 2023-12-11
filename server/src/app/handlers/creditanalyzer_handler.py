@@ -52,8 +52,32 @@ class CreditAnalyzerHandler:
     @staticmethod
     def handle():
         try:
-            input_data = request.get_json()
+            default_value = {
+                "Attribute1": "A11",
+                "Attribute2": 12,
+                "Attribute3": "A30",
+                "Attribute4": "A40",
+                "Attribute5": 0,
+                "Attribute6": "A61",
+                "Attribute7": "A72",
+                "Attribute8": 3,
+                "Attribute9": "A92",
+                "Attribute10": "A101",
+                "Attribute11": 4,
+                "Attribute12": "A121",
+                "Attribute13": 35,
+                "Attribute14": "A141",
+                "Attribute15": "A151",
+                "Attribute16": 12,
+                "Attribute17": "A173",
+                "Attribute18": 1,
+                "Attribute19": "A192",
+                "Attribute20": "A202"
+            } 
 
+            request_data = request.get_json()
+
+            input_data = {**default_value, **request_data}
             # Validate input_data
             if not input_data:
                 return jsonify({'error': 'Missing Params'}), 400
