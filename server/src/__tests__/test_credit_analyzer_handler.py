@@ -12,7 +12,7 @@ def test_credit_analyzer_handler_returns_valid_response(app):
     handler = CreditAnalyzerHandler()
 
     input_data = {
-            "Attribute1": "A11",
+            "Attribute1": "A12",
             "Attribute2": 12,
             "Attribute3": "A30",
             "Attribute4": "A40",
@@ -51,8 +51,25 @@ def test_credit_analyzer_handler_returns_valid_response_good_class(app):
     handler = CreditAnalyzerHandler()
 
     input_data = {
-        "Attribute1": "A11",
-        # ... (other attributes)
+        "Attribute1": "A13",
+        "Attribute2": 12,
+        "Attribute3": "A30",
+        "Attribute4": "A40",
+        "Attribute5": 5000,
+        "Attribute6": "A61",
+        "Attribute7": "A72",
+        "Attribute8": 3,
+        "Attribute9": "A92",
+        "Attribute10": "A101",
+        "Attribute11": 4,
+        "Attribute12": "A121",
+        "Attribute13": 35,
+        "Attribute14": "A141",
+        "Attribute15": "A151",
+        "Attribute16": 12,
+        "Attribute17": "A173",
+        "Attribute18": 1,
+        "Attribute19": "A192",
         "Attribute20": "A202"
     }
 
@@ -73,6 +90,24 @@ def test_credit_analyzer_handler_returns_valid_response_bad_class(app):
 
     input_data = {
         "Attribute1": "A11",
+        "Attribute2": 12,
+        "Attribute3": "A30",
+        "Attribute4": "A40",
+        "Attribute5": 5000,
+        "Attribute6": "A61",
+        "Attribute7": "A72",
+        "Attribute8": 3,
+        "Attribute9": "A92",
+        "Attribute10": "A101",
+        "Attribute11": 4,
+        "Attribute12": "A121",
+        "Attribute13": 35,
+        "Attribute14": "A141",
+        "Attribute15": "A151",
+        "Attribute16": 12,
+        "Attribute17": "A173",
+        "Attribute18": 1,
+        "Attribute19": "A192",
         "Attribute20": "A202"
     }
 
@@ -87,6 +122,6 @@ def test_credit_analyzer_handler_returns_valid_response_bad_class(app):
         response = handler.handle()
 
     assert response.status_code == 200
-    assert response.json['class'] == 'Good'
-    assert response.json['prediction'] == 1
+    assert response.json['class'] == 'Bad'
+    assert response.json['prediction'] == 2
 
