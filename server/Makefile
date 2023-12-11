@@ -30,3 +30,6 @@ stop:
 
 create_network:
 	docker network create $(NETWORK_NAME);
+
+test:
+	pytest
