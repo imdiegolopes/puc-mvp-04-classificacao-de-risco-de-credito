@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 
 const formFieldData = [
-  { label: 'Você é nosso cliente?', name: 'Attribute1', type: 'select', options: ["Sim", "Não"] },
+  { label: 'Você é nosso cliente?', name: 'Attribute1', type: 'select', options: ["Não", "Sim"] },
   { label: 'Nome Completo', name: 'Attribute19', type: 'text' },
   { label: 'Quantos anos você tem?', name: 'Attribute13', type: 'number' },
   { label: 'Duração em meses', name: 'Attribute2', type: 'number' },
@@ -21,11 +21,14 @@ function App() {
     event.preventDefault();
 
     try {
-      formData.Attribute1 = formData?.Attribute1 && formData.Attribute1 == 'Sim' ? 'A13' : 'A11'
+
+      console.log(formData.Attribute1)
+      formData.Attribute1 = formData?.Attribute1 == '' || formData?.Attribute1 == 'Não' ? 'A11' : 'A13' // Define o tipo de conta
       formData.Attribute8 = 3; // Define a taxa de 8% para todos os clientes
       formData.Attribute11 = 3;
       formData.Attribute16 = 0; // Define o numero de credito para 0
       formData.Attribute18 = 0; // Define o numero de pessoas obrigadas a fornecer sustento para 0
+      formData.Attribute5 = formData?.Attribute5 == 0 ? 500 : formData?.Attribute5 // Define o valor do emprestimo
 
       const response = await fetch('http://localhost:5000/v1/analyze_credit', {
         method: 'POST',
