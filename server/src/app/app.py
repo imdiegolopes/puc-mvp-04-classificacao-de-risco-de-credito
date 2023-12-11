@@ -10,7 +10,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.add_url_rule('/', 'index', HealthcheckHandler.handle, methods=['GET'])
-app.add_url_rule('/v1/credit-analyzer', 'credit_analyzer',
+app.add_url_rule('/v1/analyze_credit', 'credit_analyzer',
                  CreditAnalyzerHandler.handle, methods=['POST'])
 
 if __name__ == '__main__':
