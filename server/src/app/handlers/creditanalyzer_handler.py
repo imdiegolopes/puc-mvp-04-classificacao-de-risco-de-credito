@@ -58,9 +58,6 @@ class CreditAnalyzerHandler:
             if not input_data:
                 return jsonify({'error': 'Missing Params'}), 400
 
-            # categorical_cols = [f'Attribute{i}' for i in range(1, 62)]
-
-
             
             # fetch dataset
             statlog_german_credit_data = fetch_ucirepo(id=144)
