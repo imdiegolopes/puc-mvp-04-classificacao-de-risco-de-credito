@@ -17,3 +17,6 @@ Os seguintes algoritmos serão empregados no projeto:
 - Naive Bayes
 - Máquina de Vetores de Suporte (SVM)
 
+## Ambiente Virtual
+
+É possível acompanhar o projeto através do Google Collab, através dessa URL: [Google Collab](https://colab.research.google.com/drive/1TTxA4Wz-aolTi7Lo6xFkBS_DFOBRGwwI?usp=sharing)
