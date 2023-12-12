@@ -1,7 +1,5 @@
 # Credit Risk API Service
 
-This service acts as an API gateway forwarding requests to three different endpoints: Exchange Rates Service, User Identity Service, and Financial Service. It runs on http://localhost:5000.
-
 # Makefile
 
 This Makefile provides a set of commands to help with building, running, and managing the Credit Risk API Service.
@@ -38,7 +36,9 @@ export PYTHONPATH=$(shell pwd)
 
 - make stop: Stop and remove the running Docker container.
 
-- make create_network: Create the Docker Network "my_network"
+- make create_network: Create the Docker Network
+
+- make test: Run the tests
 
 ## Run a cURL example
 
