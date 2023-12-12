@@ -1,0 +1,136 @@
+openapi: 3.0.0
+
+info:
+  title: Documentação da API de Análise de Crédito
+  version: 1.0.0
+  description: API para análise de crédito com base em um modelo de aprendizado de máquina treinado.
+
+paths:
+  /v1/analyze_credit:
+    post:
+      summary: Analisa dados de crédito
+      description: |
+        Este endpoint aceita dados de crédito como entrada e retorna uma previsão sobre a qualidade do crédito.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Attribute1:
+                  type: string
+                  description: Status da conta corrente existente.
+                Attribute2:
+                  type: integer
+                  description: Duração em meses.
+                Attribute3:
+                  type: string
+                  description: Histórico de crédito.
+                Attribute4:
+                  type: string
+                  description: Propósito.
+                Attribute5:
+                  type: integer
+                  description: Quantidade de crédito.
+                Attribute6:
+                  type: string
+                  description: Poupança/obrigações de títulos.
+                Attribute7:
+                  type: string
+                  description: Emprego atual desde.
+                Attribute8:
+                  type: number
+                  description: Taxa de parcelamento em porcentagem da renda disponível.
+                Attribute9:
+                  type: string
+                  description: Estado civil e sexo.
+                Attribute10:
+                  type: string
+                  description: Outros devedores/fiadores.
+                Attribute11:
+                  type: integer
+                  description: Residência atual desde.
+                Attribute12:
+                  type: string
+                  description: Tipo de propriedade.
+                Attribute13:
+                  type: integer
+                  description: Idade.
+                Attribute14:
+                  type: string
+                  description: Outros planos de parcelamento.
+                Attribute15:
+                  type: string
+                  description: Tipo de moradia.
+                Attribute16:
+                  type: integer
+                  description: Número de créditos existentes neste banco.
+                Attribute17:
+                  type: string
+                  description: Profissão.
+                Attribute18:
+                  type: integer
+                  description: Número de pessoas obrigadas a fornecer sustento.
+                Attribute19:
+                  type: string
+                  description: Telefone.
+                Attribute20:
+                  type: string
+                  description: Trabalhador estrangeiro.
+              example:
+                Attribute1: "A11"
+                Attribute2: 12
+                Attribute3: "A30"
+                Attribute4: "A40"
+                Attribute5: 0
+                Attribute6: "A61"
+                Attribute7: "A72"
+                Attribute8: 3
+                Attribute9: "A92"
+                Attribute10: "A101"
+                Attribute11: 4
+                Attribute12: "A121"
+                Attribute13: 35
+                Attribute14: "A141"
+                Attribute15: "A151"
+                Attribute16: 12
+                Attribute17: "A173"
+                Attribute18: 1
+                Attribute19: "A192"
+                Attribute20: "A202"
+      responses:
+        '200':
+          description: Resposta bem-sucedida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prediction:
+                    type: integer
+                    description: A previsão do modelo (1 para Good, 2 para Bad).
+                  class:
+                    type: string
+                    description: A classe atribuída à previsão ("Good" ou "Bad").
+                  mapped_response:
+                    type: object
+                    description: Mapeamento dos atributos de entrada para seus nomes significativos.
+              example:
+                prediction: 1
+                class: "Good"
+                mapped_response:
+                  Status da conta corrente existente: "A11"
+                  Duração em meses: 12
+                  # Adicione os outros atributos aqui...
+
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Mensagem de erro.
+      example:
+        error: "Erro interno do servidor."
+
