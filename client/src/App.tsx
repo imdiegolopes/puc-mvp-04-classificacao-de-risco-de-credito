@@ -55,6 +55,8 @@ function App() {
         </a>
       </div>
       <h1>Credifácil</h1>
+      <h3>Análise de crédito de forma rápida, simples e fácil.</h3>
+      <p>Para ter a sua análise de crédito feita, basta preencher as suas informações abaixo com alguns dos seus dados que o processo é automático.</p>
       <div className="card">
         <form onSubmit={handleSubmit}>
           {/* Render form fields based on formFieldData */}
